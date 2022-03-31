@@ -1,0 +1,106 @@
+.barra {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 10px;
+  background-image: url(../../assets/imagenes/bannerosc.jpg);
+  background-size: cover;
+  border-bottom: 1px solid rgb(43, 41, 56);
+  z-index: 100;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logo{
+    display: table;
+}
+.logo a{
+    text-decoration: none;
+    color: #fff;
+    
+}
+#logoap{
+    width: 110px;
+    cursor: pointer;
+    color: #fff;
+    display: inline-table;
+    vertical-align: middle;
+}
+.nav-bar{
+    list-style: none;
+    display: table;
+    margin-right:100px;
+        
+}
+.nav-links{
+    display: table-cell;
+    vertical-align: middle;
+}
+.nav-links li{
+    display: inline-block;
+    padding: 10px;
+}
+.nav-bar li a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-bar li a::before{
+    content: "";
+    height: 3px;
+    width: 0%;
+    background-color: #329297;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.4s ease-out;
+}
+.nav-bar li a:hover::before{
+    width: 100%;
+}
+.nav-bar li:hover a{
+    color: #329297;
+    transition: 0.4s;
+}
+
+.login{
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+    
+}
+#loginimg{
+        color: #fff;
+        font-size: 30px;   
+        margin-right: 10px;              
+}
+
+
+.banner{
+    background-image: url(../../assets/imagenes/Bannercielo.png);
+    overflow: hidden;
+    height: 600px;
+    vertical-align: middle;
+    
+}
+#name{
+    color: white;
+    font-size: 60px;
+    text-align: center;
+    margin-top: 200px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    text-shadow: 0 0 5px #329297;
+}
+
+#titulo{
+    color: white;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+}
+
