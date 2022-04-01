@@ -4,14 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { SocialBarComponent } from './Components/social-bar/social-bar.component';
 import { AcercaDeComponent } from './Components/acerca-de/acerca-de.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SocialBarComponent,
     AcercaDeComponent
   ],
   imports: [
