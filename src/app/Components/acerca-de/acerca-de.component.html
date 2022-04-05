@@ -1,24 +1,46 @@
 <div class="container-fluid">
    <div class="d-flex flex-wrap acerca-de align-items-center justify-content-center">
       <div class="imagen col-lg-3  align-item-center justify-content-end d-flex ">
-         <img src="../../../assets/imagenes/foto-puente3.png"  alt="Puente" id="foto-puente">
+         <img src="../../../assets/imagenes/foto-puente3.png" alt="Puente" id="foto-puente">
       </div>
       <div class="info align-items-center justify-content-center col-lg-7">
          <h1>Acerca de mi</h1>
          <div class="d-flex info-acerca-de">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio accusantium autem repellat, animi
-               numquam nobis amet dolorem, iure suscipit tempore error aliquam? Corporis at adipisci velit aliquam,
-               expedita provident laborum!</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vel officiis, quidem eos repudiandae
-               laboriosam fuga ab culpa ut sed in unde perspiciatis explicabo nihil, blanditiis maiores fugiat quas
-               ullam.</p>
-
+            <p>{{infoMia}}</p>
+            
          </div>
-
+         <div>
+            <button mat-mini-fab class="btn btn-danger" type="button" data-bs-toggle="modal"
+               data-bs-target="#formInfoAcercaDe">
+               <mat-icon>edit</mat-icon>
+            </button>
+         </div>
       </div>
-
-
    </div>
-
-
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="formInfoAcercaDe" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Acerca de mi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formAcercaDe">
+                <div class="mb-3">
+                  <label for="acercaDeMi" class="form-label">Redactar información</label>
+                  <input type="text" class="form-control" id="acercaDeMi" formControlName="acercaDeMi" placeholder="Escriba aquí">
+                  <div *ngIf="acercaDeMi?.invalid && acercaDeMi?.touched" class="text-danger">Debe completar este campo.</div>
+                </div>
+            </form>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="cambiosGuardados()">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>

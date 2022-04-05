@@ -54,7 +54,6 @@
 
 .banner{
     position: relative;
-    background: url(../../../assets/imagenes/Bannercielo.png) center;
     overflow: hidden;
     height: 600px;
 }
@@ -77,4 +76,11 @@
     font-weight: 600;
     margin: 20;
     display: block;
+}
+
+#ciudad{
+    font-weight: 600;
+    margin: 20;
+    display: block;
+
 }

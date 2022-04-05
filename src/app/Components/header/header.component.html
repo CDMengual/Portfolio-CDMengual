@@ -1,27 +1,83 @@
 <nav class="barra">
-    <div clarss="container-fluid">
+    <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between row">
-            <a href="#" class="logoap d-flex align-items-center justify-content-center col-lg-auto col-sm-auto"><img src="../../../assets/imagenes/APLogo-20-20.png" alt="Logo Argentina Programa"
-                id="logoap">#YoProgramo</a>
+            <a href="#" class="logoap d-flex align-items-center justify-content-center col-lg-auto col-sm-auto"><img
+                    src="../../../assets/imagenes/APLogo-20-20.png" alt="Logo Argentina Programa"
+                    id="logoap">#YoProgramo</a>
             <div class="redes col-lg-auto col-sm-auto">
                 <ul class=" nav d-flex align-items-center  justify-content-center">
-                    <li class="nav-item"><a href="https://wa.me/541165119855" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>                  
-                    <li class="nav-item"><a href="mailto:cdmengual@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a></li>
-                    <li class="nav-item"><a href="https://github.com/CDMengual" target="_blank"><i class="fa-brands fa-github"></i></a></li>
-                    <li class="nav-item"><a href="https://www.instagram.com/cesarmengual_/?hl=es-la" target="_blank"><i class="fa-brands fa-instagram"></i></a></li> 
-                    <li class="nav-item"><a href="https://www.linkedin.com/in/cesar-mengual-0187182b" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    <li class="nav-item"><a href="https://wa.me/541165119855" target="_blank"><i
+                                class="fa-brands fa-whatsapp"></i></a></li>
+                    <li class="nav-item"><a href="mailto:cdmengual@gmail.com" target="_blank"><i
+                                class="fa-solid fa-envelope"></i></a></li>
+                    <li class="nav-item"><a href="https://github.com/CDMengual" target="_blank"><i
+                                class="fa-brands fa-github"></i></a></li>
+                    <li class="nav-item"><a href="https://www.instagram.com/cesarmengual_/?hl=es-la" target="_blank"><i
+                                class="fa-brands fa-instagram"></i></a></li>
+                    <li class="nav-item"><a href="https://www.linkedin.com/in/cesar-mengual-0187182b" target="_blank"><i
+                                class="fa-brands fa-linkedin-in"></i></a></li>
                     <li class="nav-item"><a href="#"><i class="fas fa-user" id="loginimg"></i></a></li>
                 </ul>
             </div>
-        </div>    
+        </div>
     </div>
 </nav>
-<div class="banner">
-    <div class="container-fluid banner-text">
-        <h1 id="name">César D. Mengual</h1>
-        <h2 id="titulo">Full Stack Developer Jr.</h2>
+<div class="container-fluid banner" [ngStyle]="{'background': 'url(' + imagen + ') center'}">
+    <div class="row d-flex banner-text">
+        <div>
+            <h1 id="name">{{nombre}}</h1>
+            <h2 id="titulo">{{puesto}}</h2>
+            <h3 id="cuidad">{{ciudad}}</h3>
+        </div>
+        <div>
+            <button mat-mini-fab class="btn btn-danger" type="button" data-bs-toggle="modal"
+                data-bs-target="#formInfoPersonal">
+                <mat-icon>edit</mat-icon>
+            </button>
+
+        </div>
     </div>
+
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="formInfoPersonal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formHeader">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Nombre y Apellido</label>
+                        <input type="text" class="form-control" id="fullName" formControlName="fullName"
+                            placeholder="Nombre y Apellido">
+                        <div *ngIf="fullName?.invalid && fullName?.touched" class="text-danger">Debe completar su nombre
+                            y apellido.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posicion" class="form-label">Posición</label>
+                        <input type="text" class="form-control" id="posicion" formControlName="posicion"
+                            placeholder="Posición">
+                        <div *ngIf="posicion?.invalid && posicion?.touched" class="text-danger">Debe completar este
+                            campo</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="ciudadDeResidencia">Ciudad de residencia</label>
+                        <input type="text" class="form-control" id="ciudadDeResidencia"
+                            formControlName="ciudadDeResidencia" placeholder="Ciudad de residencia">
+                        <div *ngIf="ciudadDeResidencia?.invalid && ciudadDeResidencia?.touched" class="text-danger">Debe
+                            completar este campo</div>
+                    </div>
+                </form>
 
-
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="cambiosGuardados()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
