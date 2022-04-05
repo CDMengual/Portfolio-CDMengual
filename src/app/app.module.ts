@@ -9,13 +9,15 @@ import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ExperienciaComponent } from './components/experiencia/experiencia.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AcercaDeComponent
+    AcercaDeComponent,
+    ExperienciaComponent
   ],
   imports: [
     BrowserModule,
