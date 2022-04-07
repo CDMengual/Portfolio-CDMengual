@@ -1,28 +1,95 @@
 <div class="container-fluid experiencia">
-    <h3>/// Experiencia</h3>
-    <div class="dpes">
-        <div class="logo-dpes">
-            <img src="img/Logotipo_de_la_Provincia_de_Buenos_Aires.svg.png" id="logo-prov" width="150px" alt="">
+    <h3 class="titulofluid">/// Experiencia</h3>
+    <div *ngFor="let trabajo of experiencia; let indice=index">
+      <div class="card" style="max-width: 100%;">
+        <div class="row g-0 ">
+          <div class="col-md-3" style="padding: 30px;">
+            <img src={{trabajo.logo}} width="200px"  class="img-fluid" alt="Logo prov. Buenos Aires">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h4 class="card-title">{{trabajo.empresa}}</h4>
+              <h5 class="card-subtitle">{{trabajo.cargo}}</h5>
+              <h5 class="card-subtitle">Desde {{trabajo.fechaInicio}}</h5>
+              <p class="card-text">{{trabajo.tareas}}</p>
+            </div>
+          </div>
+          <button mat-mini-fab  type="button" data-bs-toggle="modal"
+          data-bs-target="#formExperiencia" (click)="cargarFormulario(indice)">
+          <mat-icon>edit</mat-icon>
+          </button>
+             <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal"
+          data-bs-target="#borrarExperiencia" (click)="deseaEliminar(indice)">
+          <mat-icon>delete</mat-icon>
+          </button>
         </div>
-        <div class="info-dpes">
-        <h4>Dirección Provincial de Educación Superior de la Prov. de Buenos Aires</h4>
-        <h6>Coordinador Académico</h6>
-        <h6>2021-Actualidad</h6>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, quas reiciendis dolorum eaque quam possimus quibusdam placeat accusamus est, velit, vel excepturi maxime harum provident sed officia sapiente quae dicta?</p>
-        </div   >
-        
-    </div>
-    <div class="coope">
-        <h4>Asociación Cooperadora INEF N°1 Dr. Enrique Romero Brest</h4>
-        <h6>Jefe de Administración</h6>
-        <h6>2015-2021</h6>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, quas reiciendis dolorum eaque quam possimus quibusdam placeat accusamus est, velit, vel excepturi maxime harum provident sed officia sapiente quae dicta?</p>
-    </div>
-    <div class="malvinas">
-        <h4>Municipalidad Malvinas Argentinas</h4>
-        <h6>Coordinadopr de Eventos Deportivos</h6>
-        <h6>2019-2020</h6>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, quas reiciendis dolorum eaque quam possimus quibusdam placeat accusamus est, velit, vel excepturi maxime harum provident sed officia sapiente quae dicta?</p>
-    </div>
-   
+      </div>
+    <div>
+  </div>  
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="formExperiencia" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Información laboral</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formExperiencia">
+                <div class="mb-3">
+                  <label for="expEmpresa" class="form-label">Empresa/Institución</label>
+                  <input type="text" class="form-control" id="expEmpresa" formControlName="expEmpresa" placeholder="Nombre empresa/institución">
+                  <div *ngIf="expEmpresa?.invalid && expEmpresa?.touched" class="text-danger">Debe completar este campo.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="expCargo" class="form-label">Cargo</label>
+                  <input type="text" class="form-control" id="expCargo" formControlName="expCargo" placeholder="Cargo">
+                  <div *ngIf="expCargo?.invalid && expCargo?.touched" class="text-danger">Debe completar este campo</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="expFechaInicio">Año</label>
+                    <input type="date" class="form-control" id="expFechaInicio" formControlName="expFechaInicio">
+                    <div *ngIf="expFechaInicio?.invalid && expFechaInicio?.touched" class="text-danger">Debe completar este campo</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="expTareas">Tareas</label>
+                    <input type="text" class="form-control" id="expTareas" formControlName="expTareas" placeholder="Tareas">
+                    <div *ngIf="expTareas?.invalid && expTareas?.touched" class="text-danger">Debe completar este campo</div>
+                </div>
+            </form>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="cambiosGuardados()">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+   
+   
+<!-- Modal de borrar -->
+<div class="modal fade" id="borrarExperiencia" tabindex="-1" aria-labelledby="borrarExperienciaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="borrarExperienciaLabel">Borrar</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <label for="confirmar" class="form-label">¿Esta Segura/o que desea borrar este campo?</label>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="borrarExperiencia()">Sí</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          </div>
+      </div>
+</div>
+    
+    
+    
+    

@@ -10,8 +10,8 @@
             
          </div>
          <div>
-            <button mat-mini-fab class="btn btn-danger" type="button" data-bs-toggle="modal"
-               data-bs-target="#formInfoAcercaDe">
+            <button mat-mini-fab  type="button" data-bs-toggle="modal"
+               data-bs-target="#formInfoAcercaDe" (click)="cargarFormulario()">
                <mat-icon>edit</mat-icon>
             </button>
          </div>
@@ -31,7 +31,7 @@
             <form [formGroup]="formAcercaDe">
                 <div class="mb-3">
                   <label for="acercaDeMi" class="form-label">Redactar información</label>
-                  <input type="text" class="form-control" id="acercaDeMi" formControlName="acercaDeMi" placeholder="Escriba aquí">
+                  <input type="text" class="form-control eti" id="acercaDeMi" formControlName="acercaDeMi" placeholder="Escriba aquí">
                   <div *ngIf="acercaDeMi?.invalid && acercaDeMi?.touched" class="text-danger">Debe completar este campo.</div>
                 </div>
             </form>
@@ -39,7 +39,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="cambiosGuardados()">Guardar cambios</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="cambiosGuardados()">Guardar cambios</button>
         </div>
       </div>
     </div>

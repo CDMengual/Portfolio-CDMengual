@@ -53,11 +53,12 @@
 }
 
 .banner{
-    
+    position: relative;
     overflow: hidden;
     height: 600px;
 }
 .banner-text{
+    width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -67,10 +68,12 @@
 }
 #name{
     font-size: 60px;
+    line-height: normal;
     font-family: 'Space Mono', monospace;
     font-weight: 700;
     text-shadow: 0 0 5px #329297;
-    margin: 0;
+    margin-bottom: 20px;
+    
 }
 #titulo{
     font-weight: 600;

@@ -26,6 +26,11 @@ export class AcercaDeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cargarFormulario(){
+    this.formAcercaDe.get("acercaDeMi")?.setValue(this.infoMia)
+  }
+
+
   cambiosGuardados(){
     if(this.formAcercaDe.valid){
       alert("Cambios guardados");

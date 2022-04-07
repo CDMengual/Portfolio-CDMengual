@@ -1,0 +1,31 @@
+.experiencia{
+    margin-top: 3;
+    width: 100%;
+    padding: 30px;
+    background-color: #0e1314;
+
+}
+
+.experiencia h3{
+    color: #fff;
+    border-bottom: 1px solid  #DE570F ;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: normal;
+   
+}
+
+.card{
+    background-color: #0e1314;
+    color: #fff;
+}
+
+.card-body h4{
+    font-size: 25px;
+}
+.card-body h5{
+    font-size: 20px;
+}
+.card-body h4,h5,p{
+    margin: 5px;
+}
