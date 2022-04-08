@@ -1,13 +1,15 @@
 <div class="container-fluid educacion">
     <h3 class="titulofluid">/// Educación</h3>
-    <div *ngFor="let titulo of educacion; let indice=index" style="display: inline-flex;">
-        <div class="card bg-dark" style="display: inline-flex">
+    <div class="container-fluid" style="display: inline-flex; justify-content: center; flex-wrap: wrap;">
+    
+        <div *ngFor="let titulo of educacion; let indice=index">
+        <div class="card bg-dark">
             <img src={{titulo.logo}} style="max-width: 200px; height: 70px;" class="card-img-top img-fluid" alt="Logo">
             <div class="card-body">
                 <h4 class="card-title">{{titulo.titulo}}</h4>
                 <h5 class="card-subtitle">{{titulo.instituto}}</h5>
                 <p class="card-text">Fecha de egreso {{titulo.fechaEgreso}}</p>
-            </div>
+            </div> 
             <div class="d-flex justify-content-end">
                 <button mat-mini-fab type="button" data-bs-toggle="modal" data-bs-target="#formEducacion"
                     (click)="cargarFormulario(indice)">
@@ -20,6 +22,7 @@
             </div>
         </div>
     </div>
+</div>
         <button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal"
         data-bs-target="#addEducacion" >
         <mat-icon>add</mat-icon>
@@ -27,7 +30,7 @@
    
 </div>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="formEducacion" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -76,9 +79,9 @@
     </div>
 </div>
 
+-->
 
-
-<!-- Modal de borrar -->
+<!-- Modal de borrar 
 <div class="modal fade" id="borrarEducacion" tabindex="-1" aria-labelledby="borrarEducacionLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -98,8 +101,8 @@
         </div>
     </div>
 </div>
-
-<!-- Modal Agregar-->
+-->
+<!-- Modal Agregar
 <div class="modal fade" id="addEducacion" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -148,3 +151,4 @@
     </div>
 </div>
 
+-->

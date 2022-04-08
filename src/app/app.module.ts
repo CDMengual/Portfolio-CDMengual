@@ -9,9 +9,10 @@ import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ExperienciaComponent } from './components/experiencia/experiencia.component';
-import { EducacionComponent } from './components/educacion/educacion.component';
-import { HabilidadesComponent } from './components/habilidades/habilidades.component';
+import { ExperienciaComponent } from './Components/experiencia/experiencia.component';
+import { EducacionComponent } from './Components/educacion/educacion.component';
+import { HabilidadesComponent } from './Components/habilidades/habilidades.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { HabilidadesComponent } from './components/habilidades/habilidades.compo
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
