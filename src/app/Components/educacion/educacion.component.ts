@@ -85,7 +85,7 @@ export class EducacionComponent implements OnInit {
     this.educacion.splice(indice,1)
   }
 
-  
+ 
 
   get eduLogo(){
     return this.formEducacion.get('eduLogo');

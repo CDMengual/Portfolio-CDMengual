@@ -27,6 +27,12 @@
     <div>
   </div>  
 </div>
+<button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal"
+data-bs-target="#addExperiencia" >
+<mat-icon>add</mat-icon>
+</button>
+
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="formExperiencia" tabindex="-1">
@@ -89,7 +95,48 @@
           </div>
       </div>
 </div>
+</div>
     
-    
-    
+
+<!-- Modal Agregar-->
+<div class="modal fade" id="addExperiencia" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Información laboral</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="formExperiencia">
+              <div class="mb-3">
+                <label for="expEmpresa" class="form-label">Empresa/Institución</label>
+                <input type="text" class="form-control" id="expEmpresa" formControlName="expEmpresa" placeholder="Nombre empresa/institución">
+                <div *ngIf="expEmpresa?.invalid && expEmpresa?.touched" class="text-danger">Debe completar este campo.</div>
+              </div>
+              <div class="mb-3">
+                <label for="expCargo" class="form-label">Cargo</label>
+                <input type="text" class="form-control" id="expCargo" formControlName="expCargo" placeholder="Cargo">
+                <div *ngIf="expCargo?.invalid && expCargo?.touched" class="text-danger">Debe completar este campo</div>
+              </div>
+              <div class="mb-3">
+                  <label class="form-label" for="expFechaInicio">Año</label>
+                  <input type="date" class="form-control" id="expFechaInicio" formControlName="expFechaInicio">
+                  <div *ngIf="expFechaInicio?.invalid && expFechaInicio?.touched" class="text-danger">Debe completar este campo</div>
+              </div>
+              <div class="mb-3">
+                  <label class="form-label" for="expTareas">Tareas</label>
+                  <input type="text" class="form-control" id="expTareas" formControlName="expTareas" placeholder="Tareas">
+                  <div *ngIf="expTareas?.invalid && expTareas?.touched" class="text-danger">Debe completar este campo</div>
+              </div>
+          </form>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="cambiosGuardados()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
     
