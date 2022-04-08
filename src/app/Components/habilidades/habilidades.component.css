@@ -1,0 +1,16 @@
+.habilidades{
+    margin-top: 3;
+    width: 100%;
+    padding: 30px;
+    background-color: #0e1314;
+
+}
+
+.habilidades h3{
+    color: #fff;
+    border-bottom: 1px solid  #DE570F ;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: normal;
+   
+}

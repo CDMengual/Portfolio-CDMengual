@@ -35,18 +35,6 @@ export class EducacionComponent implements OnInit {
     instituto: "Escuela Superior de Comercio Carlos Pellegrini",
     fechaEgreso:"20/12/2009",
   },
-    {logo: 'https://i0.wp.com/romerobrest.edu.ar/wp-content/uploads/2020/08/site_logo_isef_romero-brest-1_210x69.png?fit=210%2C69&ssl=1',
-    titulo: "Profesor de Educación Física con especialización en Formación y Gestión Deportiva",
-    instituto: "ISEF N°1 Dr. Enrique Romero Brest",
-    fechaEgreso:"01/03/2019",},
-    {logo: 'https://i0.wp.com/romerobrest.edu.ar/wp-content/uploads/2020/08/site_logo_isef_romero-brest-1_210x69.png?fit=210%2C69&ssl=1',
-    titulo: "Profesor de Educación Física con especialización en Formación y Gestión Deportiva",
-    instituto: "ISEF N°1 Dr. Enrique Romero Brest",
-    fechaEgreso:"01/03/2019",},
-    {logo: 'https://i0.wp.com/romerobrest.edu.ar/wp-content/uploads/2020/08/site_logo_isef_romero-brest-1_210x69.png?fit=210%2C69&ssl=1',
-    titulo: "Profesor de Educación Física con especialización en Formación y Gestión Deportiva",
-    instituto: "ISEF N°1 Dr. Enrique Romero Brest",
-    fechaEgreso:"01/03/2019",},
     ]
 }
 
