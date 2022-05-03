@@ -23,15 +23,15 @@
 </nav>
 <div class="container-fluid banner" [ngStyle]="{'background': 'url(' + imagen + ') center'}">
   <div class="banner-text">
-    <div *ngFor="let informacion of info; let indice=index">
+    <div>
       <div>
-        <h1 id="name">{{informacion.nombre}}</h1>
-        <h2 id="titulo">{{informacion.puesto}}</h2>
-        <h3 id="cuidad">{{informacion.ciudad}}</h3>
+        <h1 id="name">{{info?.nombre}} {{info?.apellido}}</h1>
+        <h2 id="titulo">{{info?.puesto}}</h2>
+        <h3 id="cuidad">{{info?.ciudad}}</h3>
       </div>
       <div>
         <button mat-mini-fab type="button" data-bs-toggle="modal" data-bs-target="#formInfoPersonal"
-          (click)="cargarFormulario(indice)">
+          (click)="cargarFormulario()">
           <mat-icon>edit</mat-icon>
         </button>
       </div>
@@ -52,10 +52,17 @@
       <div class="modal-body">
         <form [formGroup]="formHeader">
           <div class="mb-3">
-            <label for="fullName" class="form-label">Nombre y Apellido</label>
-            <input type="text" class="form-control" id="fullName" formControlName="fullName"
-              placeholder="Nombre y Apellido">
-            <div *ngIf="fullName?.invalid && fullName?.touched" class="text-danger">Debe completar su nombre y apellido.
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre"
+              placeholder="Nombre">
+            <div *ngIf="nombre?.invalid && nombre?.touched" class="text-danger">Debe completar su nombre.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" formControlName="apellido"
+              placeholder="Apellido">
+            <div *ngIf="apellido?.invalid && apellido?.touched" class="text-danger">Debe completar su apellido.
             </div>
           </div>
           <div class="mb-3">

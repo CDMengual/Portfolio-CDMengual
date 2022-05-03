@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Persona } from 'src/app/Entidades/persona';
+import { PersonaService } from 'src/app/Service/persona.service';
 
 @Component({
   selector: 'app-header',
@@ -9,52 +11,57 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HeaderComponent implements OnInit {
   formHeader: FormGroup;
   imagen: string;
-  info: Array <any>;
+  info!: Persona;
 
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private personaService:PersonaService,private formBuilder:FormBuilder) {
     this.formHeader=this.formBuilder.group({
       id: [],
-      fullName: ["",[Validators.required]],
+      nombre: ["",[Validators.required]],
+      apellido: ["",[Validators.required]],
       posicion: ["",[Validators.required]],
       ciudadDeResidencia: ["", [Validators.required]],
 
     })
-
-    this.info=[{
-      nombre:"Cesar D. Mengual",
-      puesto:"Full Stack Developer Jr.",
-      ciudad:"Ciudad Autónoma de Buenos Aires",
-    }]
   
     this.imagen= "../../../assets/imagenes/Bannercielo.png"
    }
 
   ngOnInit(): void {
+    this.personaService.getPersona().subscribe(info=>{
+      this.info=info;
+    })
   }
 
-  cargarFormulario(indice: number){
-    this.formHeader.get("id")?.setValue(indice)
-    this.formHeader.get("fullName")?.setValue(this.info[indice].nombre)
-    this.formHeader.get("posicion")?.setValue(this.info[indice].puesto)
-    this.formHeader.get("ciudadDeResidencia")?.setValue(this.info[indice].ciudad)
+  cargarFormulario(){
+    this.formHeader.get("id")?.setValue(1)
+    this.formHeader.get("nombre")?.setValue(this.info.nombre)
+    this.formHeader.get("apellido")?.setValue(this.info.apellido)
+    this.formHeader.get("posicion")?.setValue(this.info.puesto)
+    this.formHeader.get("ciudadDeResidencia")?.setValue(this.info.ciudad)
    
   }
 
   cambiosGuardados(){
     if(this.formHeader.valid){
       alert("Cambios guardados");
-      let indice=this.formHeader.get("id")?.value
-      this.info[indice].nombre=this.formHeader.value.fullName;
-      this.info[indice].puesto=this.formHeader.value.posicion; 
-      this.info[indice].ciudad=this.formHeader.value.ciudadDeResidencia;     
+      this.info.nombre=this.formHeader.value.nombre;
+      this.info.apellido=this.formHeader.value.apellido;
+      this.info.puesto=this.formHeader.value.posicion; 
+      this.info.ciudad=this.formHeader.value.ciudadDeResidencia;  
+      this.personaService.modificarDatosPersonales(this.info).subscribe(info=>{
+        console.log(info);
+      });  
     }
     else{
       alert("Campos invalidos")
     }
   }
 
-  get fullName(){
-    return this.formHeader.get('fullName');
+  get nombre(){
+    return this.formHeader.get('nombre');
+  }
+  get apellido(){
+    return this.formHeader.get('apellido');
   }
   get posicion(){
     return this.formHeader.get('posicion');

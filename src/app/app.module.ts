@@ -13,6 +13,7 @@ import { ExperienciaComponent } from './Components/experiencia/experiencia.compo
 import { EducacionComponent } from './Components/educacion/educacion.component';
 import { HabilidadesComponent } from './Components/habilidades/habilidades.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
