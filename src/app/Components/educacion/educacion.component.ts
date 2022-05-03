@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Estudio } from 'src/app/Entidades/estudio';
+import { EstudioService } from 'src/app/Service/estudio.service';
 
 @Component({
   selector: 'app-educacion',
@@ -7,19 +9,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./educacion.component.css']
 })
 export class EducacionComponent implements OnInit {
-  formEducacion: FormGroup
-  educacion: Array <any>
+  formEducacion: FormGroup;
+  info!: Estudio[];
 
-  constructor(private formBuilder:FormBuilder) { 
+  constructor(private estudioService:EstudioService,private formBuilder:FormBuilder) { 
     this.formEducacion=this.formBuilder.group({
       id: [],
       eduLogo: [''],
-      eduTitulo: [''],
-      eduInstituto: [''],
-      eduFechaEgreso: [''],
+      eduTitulo: ['',[Validators.required]],
+      eduInstituto: ['',[Validators.required]],
+      eduFechaEgreso: ['',[Validators.required]],
     })
 
-    this.educacion=[
+    /*this.educacion=[
       {logo: 'https://i0.wp.com/romerobrest.edu.ar/wp-content/uploads/2020/08/site_logo_isef_romero-brest-1_210x69.png?fit=210%2C69&ssl=1',
       titulo: "Profesor de Educación Física con especialización en Formación y Gestión Deportiva",
       instituto: "ISEF N°1 Dr. Enrique Romero Brest",
@@ -35,33 +37,41 @@ export class EducacionComponent implements OnInit {
     instituto: "Escuela Superior de Comercio Carlos Pellegrini",
     fechaEgreso:"20/12/2009",
   },
-    ]
+    ]*/
 }
 
   ngOnInit(): void {
+    this.estudioService.getEstudio().subscribe(info=>{
+      this.info=info;
+    })
+  }
+
+  cargarFormulario(indice: number){
+    this.formEducacion.get("id")?.setValue(indice)
+    this.formEducacion.get("eduLogo")?.setValue(this.estudio[indice].logo)
+    this.formEducacion.get("eduTitulo")?.setValue(this.estudio[indice].titulo)
+    this.formEducacion.get("eduInstituto")?.setValue(this.estudio[indice].instituto)
+    this.formEducacion.get("eduFechaEgreso")?.setValue(this.estudio[indice].fechaEgreso)
   }
 
   cambiosGuardados(){
     if(this.formEducacion.valid){
       alert("Cambios guardados");
       let indice=this.formEducacion.get("id")?.value
-      this.educacion[indice].logo=this.formEducacion.value.eduLogo;
-      this.educacion[indice].titulo=this.formEducacion.value.eduTitulo; 
-      this.educacion[indice].instituto=this.formEducacion.value.eduInstituto;
-      this.educacion[indice].fechaEgreso=this.formEducacion.value.eduFechaEgreso;     
+      this.estudio[indice].logo=this.formEducacion.value.eduLogo;
+      this.estudio[indice].titulo=this.formEducacion.value.eduTitulo; 
+      this.estudio[indice].instituto=this.formEducacion.value.eduInstituto;
+      this.estudio[indice].fechaEgreso=this.formEducacion.value.eduFechaEgreso;
+      this.estudioService.modificarEstudio(this.info).subscribe(estudio=>{
+        console.log(estudio);
+      });  
     }
     else{
       alert("Campos invalidos")
     }
   }
 
-  cargarFormulario(indice: number){
-    this.formEducacion.get("id")?.setValue(indice)
-    this.formEducacion.get("eduLogo")?.setValue(this.educacion[indice].logo)
-    this.formEducacion.get("eduTitulo")?.setValue(this.educacion[indice].titulo)
-    this.formEducacion.get("eduInstituto")?.setValue(this.educacion[indice].instituto)
-    this.formEducacion.get("eduFechaEgreso")?.setValue(this.educacion[indice].fechaEgreso)
-  }
+  
 
   deseaEliminar(indice: number){
     this.formEducacion.get("id")?.setValue(indice)
@@ -70,7 +80,9 @@ export class EducacionComponent implements OnInit {
   borrarEducacion(){
     let indice=this.formEducacion.get("id")?.value
     
-    this.educacion.splice(indice,1)
+    this.estudioService.borrarEstudio(indice).subscribe(info=>{
+      console.log(info);
+    });  ;
   }
 
  
