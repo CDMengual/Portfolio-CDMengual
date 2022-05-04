@@ -1,5 +1,7 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Estudio } from 'src/app/Entidades/estudio';
 import { EstudioService } from 'src/app/Service/estudio.service';
 
@@ -10,59 +12,45 @@ import { EstudioService } from 'src/app/Service/estudio.service';
 })
 export class EducacionComponent implements OnInit {
   formEducacion: FormGroup;
-  info!: Estudio[];
-
+  estudios: Estudio[];
+  
   constructor(private estudioService:EstudioService,private formBuilder:FormBuilder) { 
     this.formEducacion=this.formBuilder.group({
       id: [],
-      eduLogo: [''],
-      eduTitulo: ['',[Validators.required]],
-      eduInstituto: ['',[Validators.required]],
-      eduFechaEgreso: ['',[Validators.required]],
+      logo: [''],
+      titulo: ['',[Validators.required]],
+      instituto: ['',[Validators.required]],
+      fecha_egreso: ['',[Validators.required]],
     })
 
-    /*this.educacion=[
-      {logo: 'https://i0.wp.com/romerobrest.edu.ar/wp-content/uploads/2020/08/site_logo_isef_romero-brest-1_210x69.png?fit=210%2C69&ssl=1',
-      titulo: "Profesor de Educación Física con especialización en Formación y Gestión Deportiva",
-      instituto: "ISEF N°1 Dr. Enrique Romero Brest",
-      fechaEgreso:"01/03/2019",
-    },
-      {logo: 'https://www.unsam.edu.ar/img/logo-unsam-2020.png',
-      titulo: "Diplomado en Política y Gestión Deportiva",
-      instituto: "Universidad de San Martín",
-      fechaEgreso:"01/12/2020",
-    },
-    {logo: 'http://www.cpel.uba.ar/images/logo-web-carlos-pellegrini.png',
-    titulo: "Perito Mercantil",
-    instituto: "Escuela Superior de Comercio Carlos Pellegrini",
-    fechaEgreso:"20/12/2009",
-  },
-    ]*/
+    this.estudios=[];
 }
 
   ngOnInit(): void {
-    this.estudioService.getEstudio().subscribe(info=>{
-      this.info=info;
+    this.estudioService.getListaEstudios().subscribe(data=>{
+      this.estudios=data;
     })
   }
 
+  
+
   cargarFormulario(indice: number){
     this.formEducacion.get("id")?.setValue(indice)
-    this.formEducacion.get("eduLogo")?.setValue(this.estudio[indice].logo)
-    this.formEducacion.get("eduTitulo")?.setValue(this.estudio[indice].titulo)
-    this.formEducacion.get("eduInstituto")?.setValue(this.estudio[indice].instituto)
-    this.formEducacion.get("eduFechaEgreso")?.setValue(this.estudio[indice].fechaEgreso)
+    this.formEducacion.get("logo")?.setValue(this.estudios[indice].logo)
+    this.formEducacion.get("titulo")?.setValue(this.estudios[indice].titulo)
+    this.formEducacion.get("instituto")?.setValue(this.estudios[indice].instituto)
+    this.formEducacion.get("fecha_egreso")?.setValue(formatDate(this.estudios[indice].fecha_egreso,"yyyy-MM-dd","en"))
   }
 
   cambiosGuardados(){
     if(this.formEducacion.valid){
       alert("Cambios guardados");
       let indice=this.formEducacion.get("id")?.value
-      this.estudio[indice].logo=this.formEducacion.value.eduLogo;
-      this.estudio[indice].titulo=this.formEducacion.value.eduTitulo; 
-      this.estudio[indice].instituto=this.formEducacion.value.eduInstituto;
-      this.estudio[indice].fechaEgreso=this.formEducacion.value.eduFechaEgreso;
-      this.estudioService.modificarEstudio(this.info).subscribe(estudio=>{
+      this.estudios[indice].logo=this.formEducacion.value.logo;
+      this.estudios[indice].titulo=this.formEducacion.value.titulo; 
+      this.estudios[indice].instituto=this.formEducacion.value.instituto;
+      this.estudios[indice].fecha_egreso=this.formEducacion.value.fecha_egreso;
+      this.estudioService.modificarEstudio(this.estudios[indice]).subscribe(estudio=>{
         console.log(estudio);
       });  
     }
@@ -71,33 +59,49 @@ export class EducacionComponent implements OnInit {
     }
   }
 
-  
-
-  deseaEliminar(indice: number){
-    this.formEducacion.get("id")?.setValue(indice)
+  deseaEliminar(id: number){
+    this.formEducacion.get("id")?.setValue(id)
   }
 
   borrarEducacion(){
-    let indice=this.formEducacion.get("id")?.value
-    
-    this.estudioService.borrarEstudio(indice).subscribe(info=>{
-      console.log(info);
-    });  ;
+      this.estudioService.borrarEstudio(this.formEducacion.value.id).subscribe(()=>{
+      this.estudios=this.estudios.filter(estudio=>{return this.formEducacion.value.id !==estudio.id});
+    }      
+    );
   }
 
- 
+  crearEducacion(){ 
+    if(this.formEducacion.valid){
+      let newEstudio=new Estudio(1,
+        this.formEducacion.value.titulo,
+        this.formEducacion.value.instituto,
+        this.formEducacion.value.fecha_egreso,
+        this.formEducacion.value.logo,
+        1)
+        delete newEstudio.id;
+         
+      this.estudioService.crearEstudio(newEstudio).subscribe(data=>{
+        alert("Estudio guardado");
+      this.estudios.push(data);
+      });  
+    }
+    else{
+      alert("Campos invalidos")
+    }
+  }
 
-  get eduLogo(){
-    return this.formEducacion.get('eduLogo');
+
+  get logo(){
+    return this.formEducacion.get('logo');
   }
-  get eduTitulo(){
-    return this.formEducacion.get('eduTitulo');
+  get titulo(){
+    return this.formEducacion.get('titulo');
   }
-  get eduInstituto(){
-    return this.formEducacion.get('eduInstituto');
+  get instituto(){
+    return this.formEducacion.get('instituto');
   }
-  get eduFechaEgreso(){
-    return this.formEducacion.get('eduFechaEgreso');
+  get fecha_egreso(){
+    return this.formEducacion.get('fecha_egreso');
   }
 
 

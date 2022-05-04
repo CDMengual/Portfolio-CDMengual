@@ -1,17 +1,18 @@
 export class Estudio{
-    id:number;
+    id?:number;
     titulo:string;
     instituto:string;
-    fechaEgreso:number;
+    fecha_egreso:Date;
     logo: string;
     idPersona:number
 
-    constructor (id:number, titulo:string, instituto:string,fechaEgreso:number,logo:string , idPersona:number )
+    constructor (id:number, titulo:string, instituto:string,fecha_egreso:Date,logo:string , idPersona:number )
     {
+        console.log(fecha_egreso);
         this.id=id;
         this.titulo=titulo;
         this.instituto=instituto;
-        this.fechaEgreso=fechaEgreso;
+        this.fecha_egreso=new Date(fecha_egreso);
         this.logo=logo;
         this.idPersona=idPersona;
     }
