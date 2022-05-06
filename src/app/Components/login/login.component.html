@@ -1,0 +1,48 @@
+<!-- Modal -->
+<div class="modal fade" id="formLogin" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Iniciar Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formLogin">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">email</label>
+                        <input type="email" class="form-control" id="titulo" formControlName="titulo"
+                            placeholder="ejemplo@ejemplo.com">
+                        <div *ngIf="email?.invalid && email?.touched" class="text-danger">Debe cmpletar este
+                            campo.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="insituto" class="form-label">Institución educativa</label>
+                        <input type="text" class="form-control" id="instituto" formControlName="instituto"
+                            placeholder="Institución educativa">
+                        <div *ngIf="instituto?.invalid && instituto?.touched" class="text-danger">Debe completar
+                            este campo</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="fecha_egreso">Fecha de egreso</label>
+                        <input type="date" class="form-control" id="fecha_egreso" formControlName="fecha_egreso">
+                        <div *ngIf="fecha_egreso?.invalid && fecha_egreso?.touched" class="text-danger">Debe
+                            completar este campo</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="logo">Logo del instituto</label>
+                        <input type="text" class="form-control" id="logo" formControlName="logo"
+                            placeholder="Tareas">
+                        <div *ngIf="logo?.invalid && logo?.touched" class="text-danger">Debe completar este campo
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="cambiosGuardados()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
