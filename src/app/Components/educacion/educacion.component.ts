@@ -1,7 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Estudio } from 'src/app/Entidades/estudio';
 import { EstudioService } from 'src/app/Service/estudio.service';
 

@@ -8,7 +8,6 @@ export class Estudio{
 
     constructor (id:number, titulo:string, instituto:string,fecha_egreso:Date,logo:string , idPersona:number )
     {
-        console.log(fecha_egreso);
         this.id=id;
         this.titulo=titulo;
         this.instituto=instituto;

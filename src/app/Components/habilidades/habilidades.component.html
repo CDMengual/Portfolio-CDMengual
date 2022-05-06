@@ -1,16 +1,16 @@
 <div class="container-fluid habilidades">
     <h3 class="titulofluid">/// Habilidades</h3>
         <div class="container-fluid" style="display: inline-flex; justify-content: center; flex-wrap: wrap;">
-            <div *ngFor="let skill of habilidad; let indice=index"  style="display: inline-block;" >
+            <div *ngFor="let habilidad of habilidades; let indice=index"  style="display: inline-block;" >
                 <div class="card">            
-                    <h4 class="card-body" style="margin-bottom: 10px ; padding: 0px;">{{skill.skill}}</h4>
-                    <img src={{skill.logo}} class="logo" alt="html 5">
-                    <mat-progress-spinner [value]=skill.puntuacion*10 class="spinner"></mat-progress-spinner>
+                    <h4 class="card-body" style="margin-bottom: 10px ; padding: 0px;">{{habilidad.skill}}</h4>
+                    <img src={{habilidad.logo}} class="logo" alt="html 5">
+                    <mat-progress-spinner [value]=habilidad.puntuacion*10 class="spinner"></mat-progress-spinner>
                     <div>
                     <button mat-mini-fab color="accent" type="button" data-bs-toggle="modal" data-bs-target="#formHabilidad" (click)="cargarFormulario(indice)">
                     <mat-icon>edit</mat-icon></button>
                     <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal"
-                        data-bs-target="#borrarHabilidad"  (click)="deseaEliminar(indice)">
+                        data-bs-target="#borrarHabilidad"  (click)="deseaEliminar(habilidad.id!)">
                         <mat-icon>delete</mat-icon>
                     
                     </button>
@@ -35,15 +35,15 @@
             <div class="modal-body">
                 <form [formGroup]="formHabilidad">
                     <div class="mb-3">
-                        <label for="habSkill" class="form-label">Habilidad</label>
-                        <input type="text" class="form-control" id="habSkill" formControlName="habSkill" placeholder="Habilidad">
-                            <div *ngIf="habSkill?.invalid && (habSkill?.touched)" class="text-danger">
+                        <label for="skill" class="form-label">Habilidad</label>
+                        <input type="text" class="form-control" id="skill" formControlName="skill" placeholder="Habilidad">
+                            <div *ngIf="skill?.invalid && (skill?.touched)" class="text-danger">
                                Debe completar este campo
                             </div>
                     </div>
                     <div class="mb-3">
-                        <label for="habPuntuacion" class="form-label">Puntuación</label>
-                        <select selected="0" name="habPuntuacion" class="form-control" id="habPuntuacion" formControlName="habPuntuacion">
+                        <label for="puntuacion" class="form-label">Puntuación</label>
+                        <select selected="0" name="puntuacion" class="form-control" id="puntuacion" formControlName="puntuacion">
                             <option value="0">Elige una opción</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -56,13 +56,13 @@
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
-                        <div *ngIf="habPuntuacion?.invalid && (habPuntuacion?.touched)" class="text-danger">
+                        <div *ngIf="puntuacion?.invalid && (puntuacion?.touched)" class="text-danger">
                             Debe seleccionar una opción
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="habLogo" class="form-label">Logo</label>
-                        <input type="text" class="form-control" id="habLogo" formControlName="habLogo" placeholder="Enlace del logo">
+                        <label for="logo" class="form-label">Logo</label>
+                        <input type="text" class="form-control" id="logo" formControlName="logo" placeholder="Enlace del logo">
                     </div>
                 </form>
             </div>
@@ -106,15 +106,15 @@
             <div class="modal-body">
                 <form [formGroup]="formHabilidad">
                     <div class="mb-3">
-                        <label for="habSkill" class="form-label">Habilidad</label>
-                        <input type="text" class="form-control" id="habSkill" formControlName="habSkill" placeholder="Habilidad">
-                            <div *ngIf="habSkill?.invalid && (habSkill?.touched)" class="text-danger">
+                        <label for="skill" class="form-label">Habilidad</label>
+                        <input type="text" class="form-control" id="skill" formControlName="skill" placeholder="Habilidad">
+                            <div *ngIf="skill?.invalid && (skill?.touched)" class="text-danger">
                                Debe completar este campo
                             </div>
                     </div>
                     <div class="mb-3">
-                        <label for="habPuntuacion" class="form-label">Puntuación</label>
-                        <select selected="0" name="habPuntuacion" class="form-control" id="habPuntuacion" formControlName="habPuntuacion">
+                        <label for="puntuacion" class="form-label">Puntuación</label>
+                        <select selected="0" name="puntuacion" class="form-control" id="puntuacion" formControlName="puntuacion">
                             <option value="0">Elige una opción</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -127,19 +127,19 @@
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
-                        <div *ngIf="habPuntuacion?.invalid && (habPuntuacion?.touched)" class="text-danger">
+                        <div *ngIf="puntuacion?.invalid && (puntuacion?.touched)" class="text-danger">
                             Debe seleccionar una opción
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="habLogo" class="form-label">Logo</label>
-                        <input type="text" class="form-control" id="habLogo" formControlName="habLogo" placeholder="Enlace del logo">
+                        <label for="logo" class="form-label">Logo</label>
+                        <input type="text" class="form-control" id="logo" formControlName="logo" placeholder="Enlace del logo">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="cerrarHabilidadesModal" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  (click)="cambiosGuardados()">Guardar cambios</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  (click)="crearHabilidad()">Guardar cambios</button>
             </div>
         </div>
     </div>

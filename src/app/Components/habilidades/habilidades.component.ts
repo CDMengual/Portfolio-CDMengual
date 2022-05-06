@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Habilidad } from 'src/app/Entidades/habilidad';
+import { HabilidadService } from 'src/app/Service/habilidad.service';
 
 @Component({
   selector: 'app-habilidades',
@@ -9,88 +11,90 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HabilidadesComponent implements OnInit {
 
   formHabilidad: FormGroup;
-  habilidad: Array <any>;
+  habilidades: Habilidad[];
 
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private habilidadService:HabilidadService,private formBuilder:FormBuilder) {
     this.formHabilidad=this.formBuilder.group({
       id: [],
-      habSkill: ["",[Validators.required]],
-      habLogo:[""],
-      habPuntuacion:["",[Validators.required],]
+      skill: ["",[Validators.required]],
+      puntuacion:["",[Validators.required],],
+      logo:[""],
     })
 
-    this.habilidad=[
-      {skill: "HTML 5",
-      puntuacion: "8",
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/250px-HTML5_logo_and_wordmark.svg.png',
-      },
-      {skill: "CSS",
-      puntuacion: "8",
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg',
-      },
-      {skill: "TypeScript",
-      puntuacion: "6",
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png',
-      },
-      {skill: "Angular",
-      puntuacion: "7",
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Angular-logo.png',
-      },
-      {    skill: "Bootstrap",
-      puntuacion: "7",
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/512px-Bootstrap_logo.svg.png',
-      },
-      {    skill: "Trabajo en Equipo",
-      puntuacion: "9",
-      logo: 'https://www.nicepng.com/png/full/205-2054252_clip-art-royalty-free-library-about-asana-by.png',
-      },
-      {skill: "Ingles",
-      puntuacion: "5",
-      logo: 'https://freepikpsd.com/file/2019/10/eng-png-Transparent-Images.png',
-      },]
-   }
+    this.habilidades=[];
+  }
 
   ngOnInit(): void {
+    this.habilidadService.getListaHabilidades().subscribe(data=>{
+      this.habilidades=data;})
+  }
+
+ 
+    cargarFormulario(indice: number){
+    this.formHabilidad.get("id")?.setValue(indice)
+    this.formHabilidad.get("skill")?.setValue(this.habilidades[indice].skill)
+    this.formHabilidad.get("puntuacion")?.setValue(this.habilidades[indice].puntuacion)
+    this.formHabilidad.get("logo")?.setValue(this.habilidades[indice].logo)
   }
 
   cambiosGuardados(){
     if(this.formHabilidad.valid){
       alert("Cambios guardados");
       let indice=this.formHabilidad.get("id")?.value
-      this.habilidad[indice].skill=this.formHabilidad.value.habSkill;
-      this.habilidad[indice].puntuacion=this.formHabilidad.value.habPuntuacion; 
-      this.habilidad[indice].logo=this.formHabilidad.value.habLogo;  
+      this.habilidades[indice].skill=this.formHabilidad.value.skill;
+      this.habilidades[indice].puntuacion=this.formHabilidad.value.puntuacion; 
+      this.habilidades[indice].logo=this.formHabilidad.value.logo;  
+      this.habilidadService.modificarHabilidad(this.habilidades[indice]).subscribe(habilidad=>{
+        console.log(habilidad);
+      });  
     }
     else{
       alert("Campos invalidos")
     }
   }
 
-  cargarFormulario(indice: number){
-    this.formHabilidad.get("id")?.setValue(indice)
-    this.formHabilidad.get("habSkill")?.setValue(this.habilidad[indice].skill)
-    this.formHabilidad.get("habPuntuacion")?.setValue(this.habilidad[indice].puntuacion)
-    this.formHabilidad.get("habLogo")?.setValue(this.habilidad[indice].logo)
-  }
 
-  deseaEliminar(indice: number){
-    this.formHabilidad.get("id")?.setValue(indice)
+  deseaEliminar(id: number){
+    this.formHabilidad.get("id")?.setValue(id)
   }
 
   borrarHabilidad(){
-    let indice=this.formHabilidad.get("id")?.value
-    
-    this.habilidad.splice(indice,1)
+    this.habilidadService.borrarHabilidad(this.formHabilidad.value.id).subscribe(()=>{
+      this.habilidades=this.habilidades.filter(habilidad=>{return this.formHabilidad.value.id !==habilidad.id});
+    }      
+    );
   }
 
-  get habSkill(){
-    return this.formHabilidad.get('habSkill');
+  crearHabilidad(){ 
+    if(this.formHabilidad.valid){
+      let newHabilidad=new Habilidad(1,
+        this.formHabilidad.value.skill,
+        this.formHabilidad.value.puntuacion,
+        this.formHabilidad.value.logo,
+        1)
+        delete newHabilidad.id;
+         
+      this.habilidadService.crearHabilidad(newHabilidad).subscribe(data=>{
+        alert("Habilidad guardada");
+      this.habilidades.push(data);
+      console.log(data);
+      });  
+    }
+    else{
+      alert("Campos invalidos")
+    }
   }
-  get habPuntuacion(){
-    return this.formHabilidad.get('habPuntuacion');
+
+
+
+  get skill(){
+    return this.formHabilidad.get('skill');
   }
-  get habLogo(){
-    return this.formHabilidad.get('habLogo');
+  get puntuacion(){
+    return this.formHabilidad.get('puntuacion');
+  }
+  get logo(){
+    return this.formHabilidad.get('logo');
   }
 
 }
