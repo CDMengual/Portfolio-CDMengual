@@ -10,11 +10,11 @@
                 <p class="card-text">Fecha de egreso {{estudio.fecha_egreso |date:'dd/MM/yyyy'}}</p>
             </div> 
             <div class="d-flex justify-content-end">
-                <button mat-mini-fab type="button" data-bs-toggle="modal" data-bs-target="#formEducacion"
+                <button mat-mini-fab type="button" data-bs-toggle="modal" data-bs-target="#formEducacion" *ngIf="logueado"
                     (click)="cargarFormulario(indice)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal" data-bs-target="#borrarEducacion"
+                <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal" data-bs-target="#borrarEducacion"  *ngIf="logueado"
                     (click)="deseaEliminar(estudio.id!)">
                     <mat-icon>delete</mat-icon>
                 </button>
@@ -23,7 +23,7 @@
     </div>
 </div>
         <button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal"
-        data-bs-target="#addEducacion" >
+        data-bs-target="#addEducacion"  *ngIf="logueado">
         <mat-icon>add</mat-icon>
         </button>
    

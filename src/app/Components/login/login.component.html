@@ -1,48 +1,30 @@
-<!-- Modal -->
-<div class="modal fade" id="formLogin" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Iniciar Sesión</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="formLogin">
-                    <div class="mb-3">
-                        <label for="titulo" class="form-label">email</label>
-                        <input type="email" class="form-control" id="titulo" formControlName="titulo"
-                            placeholder="ejemplo@ejemplo.com">
-                        <div *ngIf="email?.invalid && email?.touched" class="text-danger">Debe cmpletar este
-                            campo.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="insituto" class="form-label">Institución educativa</label>
-                        <input type="text" class="form-control" id="instituto" formControlName="instituto"
-                            placeholder="Institución educativa">
-                        <div *ngIf="instituto?.invalid && instituto?.touched" class="text-danger">Debe completar
-                            este campo</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="fecha_egreso">Fecha de egreso</label>
-                        <input type="date" class="form-control" id="fecha_egreso" formControlName="fecha_egreso">
-                        <div *ngIf="fecha_egreso?.invalid && fecha_egreso?.touched" class="text-danger">Debe
-                            completar este campo</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="logo">Logo del instituto</label>
-                        <input type="text" class="form-control" id="logo" formControlName="logo"
-                            placeholder="Tareas">
-                        <div *ngIf="logo?.invalid && logo?.touched" class="text-danger">Debe completar este campo
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                    (click)="cambiosGuardados()">Guardar cambios</button>
-            </div>
-        </div>
-    </div>
-</div>
+<form [formGroup]=formLogin (ngSubmit)="onEnviar($event)">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" formControlName="email" 
+    [ngClass]="{'is-invalid': email?.errors && email?.touched,'is-valid': !email?.errors && email?.touched}"
+    class="form-control" id="email" aria-describedby="email">
+    <div *ngIf="email?.errors && email?.touched">
+      <p *ngIf="email?.hasError('required')" class="text-danger">
+          Se requiere email
+      </p>
+      <p *ngIf="email?.hasError('email')" class="text-danger">
+          Formato de email invalido
+      </p>
+  </div>  
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input type="password" formControlName="password" 
+    [ngClass]="{'is-invalid': password?.errors && password?.touched,'is-valid': !password?.errors && password?.touched}"
+    class="form-control" id="password">
+    <div *ngIf="password?.errors && password?.touched">
+      <p *ngIf="password?.hasError('required')" class="text-danger">
+          Debe ingresar su contraseña
+      </p>
+  </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+  <a  #closeModal data-bs-dismiss="modal" aria-label="Close"></a>
+  <div *ngIf="error">Usuario o contraseña incorrecta</div>
+</form>

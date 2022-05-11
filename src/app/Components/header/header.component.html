@@ -15,7 +15,8 @@
                 class="fa-brands fa-instagram"></i></a></li>
           <li class="nav-item"><a href="https://www.linkedin.com/in/cesar-mengual-0187182b" target="_blank"><i
                 class="fa-brands fa-linkedin-in"></i></a></li>
-          <li class="nav-item"><a href="#"><i class="fas fa-user" id="loginimg"></i></a></li>
+                <li *ngIf="logueado" class="nav-item"><a style="cursor: pointer;" (click)="cerrarSesion()"><i class="fas fa-door-open" id="loginimg" ></i></a></li>
+                <li *ngIf="!logueado" class="nav-item"><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#formLogin"><i class="fas fa-user" id="loginimg" ></i></a></li>
         </ul>
       </div>
     </div>
@@ -30,7 +31,7 @@
         <h3 id="cuidad">{{info?.ciudad}}</h3>
       </div>
       <div>
-        <button mat-mini-fab type="button" data-bs-toggle="modal" data-bs-target="#formInfoPersonal"
+        <button mat-mini-fab type="button" data-bs-toggle="modal" data-bs-target="#formInfoPersonal" *ngIf="logueado"
           (click)="cargarFormulario()">
           <mat-icon>edit</mat-icon>
         </button>
@@ -40,6 +41,21 @@
   </div>
 </div>
 
+<div class="modal fade" id="formLogin" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Iniciar Sesión</h2>
+      </div>
+      <div class="modal-body">
+        <app-login></app-login>
+      </div>
+      
+    </div>
+
+  </div>
+ 
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="formInfoPersonal" tabindex="-1">

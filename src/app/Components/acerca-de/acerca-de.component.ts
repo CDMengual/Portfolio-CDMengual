@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Persona } from 'src/app/Entidades/persona';
+import { AuthService } from 'src/app/Service/auth.service';
 import { PersonaService } from 'src/app/Service/persona.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AcercaDeComponent implements OnInit {
   formAcercaDe: FormGroup;
   info!: Persona;
 
-  constructor(private personaService:PersonaService,private formBuilder:FormBuilder) {
+  constructor(private personaService:PersonaService,private formBuilder:FormBuilder, private authService:AuthService) {
     this.formAcercaDe=this.formBuilder.group({
       acerca_de_mi: ["",Validators.required],
       url_foto:["",Validators.required],
@@ -25,6 +26,7 @@ export class AcercaDeComponent implements OnInit {
       this.info=info;
     })
   }
+  
 
   cargarFormulario(){
     this.formAcercaDe.get("id")?.setValue(1)
@@ -46,6 +48,10 @@ export class AcercaDeComponent implements OnInit {
     else{
       alert("Debe completar el campo")
     }
+  }
+
+  get logueado(){
+    return this.authService.UsuarioAutenticado;
   }
 
   get acerca_de_mi(){

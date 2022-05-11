@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Estudio } from 'src/app/Entidades/estudio';
+import { AuthService } from 'src/app/Service/auth.service';
 import { EstudioService } from 'src/app/Service/estudio.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class EducacionComponent implements OnInit {
   formEducacion: FormGroup;
   estudios: Estudio[];
   
-  constructor(private estudioService:EstudioService,private formBuilder:FormBuilder) { 
+  constructor(private estudioService:EstudioService,private formBuilder:FormBuilder, private authService:AuthService) { 
     this.formEducacion=this.formBuilder.group({
       id: [],
       logo: [''],
@@ -89,6 +90,10 @@ export class EducacionComponent implements OnInit {
     }
   }
 
+
+  get logueado(){
+    return this.authService.UsuarioAutenticado;
+  }
 
   get logo(){
     return this.formEducacion.get('logo');

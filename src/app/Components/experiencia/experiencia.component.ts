@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Experiencia } from 'src/app/Entidades/experiencia';
+import { AuthService } from 'src/app/Service/auth.service';
 import { ExperienciaService } from 'src/app/Service/experiencia.service';
 
 
@@ -17,7 +18,7 @@ export class ExperienciaComponent implements OnInit {
   
 
 
-  constructor(private experienciaService:ExperienciaService,private formBuilder:FormBuilder) { 
+  constructor(private experienciaService:ExperienciaService,private formBuilder:FormBuilder, private authService:AuthService) { 
     this.formExperiencia=this.formBuilder.group({
       id: [],
       empresa: ["",[Validators.required]],
@@ -32,33 +33,6 @@ export class ExperienciaComponent implements OnInit {
 
   }
 
-    /*this.experiencia=[
-      {empresa: "Dirección Provincial de Educación Superior de la Prov. de Buenos Aires",
-      cargo: "Coordinador Académico",
-      fechaInicio: "01/05/2021",
-      fechaFinal:"",
-      tareas: 'This is a wider card with supporting text below as a natural lead-in'+
-      'to additional content. This content is a little bit longer.',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Logotipo_de_la_Provincia_de_Buenos_Aires.svg/512px-Logotipo_de_la_Provincia_de_Buenos_Aires.svg.png'
-    },
-      
-
-      {empresa: "Asociación Cooperadora INEF N°1 Dr. Enrique Romero Brest",
-      cargo: "Jefe de Administración",
-      fechaInicio: "01/01/2016",
-      tareas: '2015-2021',
-      logo: "src=../../../assets/imagenes/lacoope_verde.png",
-      },
-
-      {empresa: "hjbhj",
-      cargo: "Coohhhadémico",
-      fechaInicio: "05/05/2020",
-      tareas: 'Tjhgjhgjhbjh hghghj.',
-      logo: 'https://1000marcas.net/wp-content/uploads/2020/01/Sega-emblema.jpg',
-      }]
-*/
-  
- 
 
   ngOnInit(): void {
     this.experienciaService.getListaExperiencias().subscribe(data=>{
@@ -128,6 +102,11 @@ export class ExperienciaComponent implements OnInit {
   }
 
  
+  get logueado(){
+    return this.authService.UsuarioAutenticado;
+  }
+
+
   get empresa(){
     return this.formExperiencia.get('empresa');
   }

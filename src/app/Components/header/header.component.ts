@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Persona } from 'src/app/Entidades/persona';
+import { AuthService } from 'src/app/Service/auth.service';
 import { PersonaService } from 'src/app/Service/persona.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
   imagen: string;
   info!: Persona;
 
-  constructor(private personaService:PersonaService,private formBuilder:FormBuilder) {
+  constructor(private personaService:PersonaService,private formBuilder:FormBuilder, private authService:AuthService) {
     this.formHeader=this.formBuilder.group({
       id: [],
       nombre: ["",[Validators.required]],
@@ -57,6 +58,15 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  get logueado(){
+    return this.authService.UsuarioAutenticado;
+  }
+  cerrarSesion(){
+    this.authService.cerrarSesion();
+  }
+
+
+  
   get nombre(){
     return this.formHeader.get('nombre');
   }

@@ -15,11 +15,11 @@
               <p class="card-text">{{trabajo.tareas}}</p>
             </div>
           </div>
-            <button mat-mini-fab  type="button" data-bs-toggle="modal"
+            <button mat-mini-fab  type="button" data-bs-toggle="modal" *ngIf="logueado"
           data-bs-target="#formExperiencia" (click)="cargarFormulario(indice)">
           <mat-icon>edit</mat-icon>
           </button>
-             <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal"
+             <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal" *ngIf="logueado"
           data-bs-target="#borrarExperiencia" (click)="deseaEliminar(indice)">
           <mat-icon>delete</mat-icon>
           </button>          
@@ -28,7 +28,7 @@
     <div>
   </div>  
 </div>
-<button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal"
+<button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal" *ngIf="logueado"  
 data-bs-target="#addExperiencia" >
 <mat-icon>add</mat-icon>
 </button>

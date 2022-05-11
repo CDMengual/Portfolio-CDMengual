@@ -10,7 +10,7 @@
             
          </div>
          <div>
-            <button mat-mini-fab  type="button" data-bs-toggle="modal"
+            <button mat-mini-fab  type="button" data-bs-toggle="modal" *ngIf="logueado"
                data-bs-target="#formInfoAcercaDe" (click)="cargarFormulario()">
                <mat-icon>edit</mat-icon>
             </button>

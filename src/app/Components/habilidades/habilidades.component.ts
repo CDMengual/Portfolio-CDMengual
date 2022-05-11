@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Habilidad } from 'src/app/Entidades/habilidad';
+import { AuthService } from 'src/app/Service/auth.service';
 import { HabilidadService } from 'src/app/Service/habilidad.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class HabilidadesComponent implements OnInit {
   formHabilidad: FormGroup;
   habilidades: Habilidad[];
 
-  constructor(private habilidadService:HabilidadService,private formBuilder:FormBuilder) {
+  constructor(private habilidadService:HabilidadService,private formBuilder:FormBuilder, private authService:AuthService) {
     this.formHabilidad=this.formBuilder.group({
       id: [],
       skill: ["",[Validators.required]],
@@ -22,7 +23,7 @@ export class HabilidadesComponent implements OnInit {
     })
 
     this.habilidades=[];
-  }
+  } 
 
   ngOnInit(): void {
     this.habilidadService.getListaHabilidades().subscribe(data=>{
@@ -86,6 +87,9 @@ export class HabilidadesComponent implements OnInit {
   }
 
 
+  get logueado(){
+    return this.authService.UsuarioAutenticado;
+  }
 
   get skill(){
     return this.formHabilidad.get('skill');

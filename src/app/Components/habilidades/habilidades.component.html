@@ -7,9 +7,9 @@
                     <img src={{habilidad.logo}} class="logo" alt="html 5">
                     <mat-progress-spinner [value]=habilidad.puntuacion*10 class="spinner"></mat-progress-spinner>
                     <div>
-                    <button mat-mini-fab color="accent" type="button" data-bs-toggle="modal" data-bs-target="#formHabilidad" (click)="cargarFormulario(indice)">
+                    <button mat-mini-fab color="accent" type="button" data-bs-toggle="modal" data-bs-target="#formHabilidad" *ngIf="logueado" (click)="cargarFormulario(indice)">
                     <mat-icon>edit</mat-icon></button>
-                    <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal"
+                    <button mat-mini-fab color="warn" type="button" data-bs-toggle="modal" *ngIf="logueado"
                         data-bs-target="#borrarHabilidad"  (click)="deseaEliminar(habilidad.id!)">
                         <mat-icon>delete</mat-icon>
                     
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal"
+        <button mat-mini-fab color="primary" style="display: block; margin: auto;" type="button" data-bs-toggle="modal" *ngIf="logueado"
         data-bs-target="#addHabilidad" >
         <mat-icon>add</mat-icon>
         </button>
