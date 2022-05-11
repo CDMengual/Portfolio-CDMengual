@@ -5,7 +5,7 @@
 
 .titulofluid{
     color: #fff;
-    border-bottom: 1px solid  #DE570F ;
+    border-top: 1px solid  #DE570F ;
     font-size: 40px;
     font-weight: 600;
     line-height: normal;
@@ -20,6 +20,7 @@
     width: 20rem;
     align-items: center;
     font-weight: 500;
+  
 }
 */
 .card h4{

@@ -15,6 +15,8 @@ import { HabilidadesComponent } from './Components/habilidades/habilidades.compo
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './Components/login/login.component';
+import { ProyectoComponent } from './Components/proyecto/proyecto.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { LoginComponent } from './Components/login/login.component';
     ExperienciaComponent,
     EducacionComponent,
     HabilidadesComponent,
-    LoginComponent
+    LoginComponent,
+    ProyectoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
