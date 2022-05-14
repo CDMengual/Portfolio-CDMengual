@@ -1,10 +1,10 @@
 .barra{
     position: fixed;
-    width: 100%; 
+    width: 100%;
     background: url(../../../assets/imagenes/bannerosc.jpg);
     background-size: cover;
     padding: 0px 10px;
-    border-bottom: 2px solid rgb(43, 41, 56);
+    border-bottom: 1px solid #329297;
     z-index: 100;
     font-size: 20px;
     font-weight: 600;
@@ -16,8 +16,8 @@
 }
 #logoap{
     width: 110px;
-    
-    color: #fff;   
+
+    color: #fff;
 }
 .redes li{
     padding: 10px;
@@ -30,8 +30,8 @@
     position: relative;
 }
 #loginimg{
-    
-    font-size: 30px;             
+
+    font-size: 30px;
 }
 
 .redes li a::before{
@@ -73,7 +73,7 @@
     font-weight: 700;
     text-shadow: 0 0 5px #329297;
     margin-bottom: 20px;
-    
+
 }
 #titulo{
     font-weight: 600;
