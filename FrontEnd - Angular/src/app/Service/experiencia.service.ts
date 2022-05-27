@@ -11,24 +11,24 @@ export class ExperienciaService {
   constructor(private http:HttpClient) { }
 
   getListaExperiencias(): Observable<Experiencia[]>{
-    return this.http.get<Experiencia[]>("http://localhost:8080/ver/experiencias");
+    return this.http.get<Experiencia[]>("https://portfolio-backend-srpingboot.herokuapp.com/ver/experiencias");
   }
 
   getExperiencia(id:String): Observable<any>{
-    return this.http.get("http://localhost:8080/ver/expriencia/"+id);
+    return this.http.get("https://portfolio-backend-srpingboot.herokuapp.com/ver/expriencia/"+id);
   }
 
   crearExperiencia(experiencia:Experiencia): Observable<any>{
-    return this.http.post("http://localhost:8080/new/experiencia",experiencia);
+    return this.http.post("https://portfolio-backend-srpingboot.herokuapp.com/new/experiencia",experiencia);
   }
 
   modificarExperiencia(experiencia:Experiencia): Observable<any>{
     console.log(experiencia);
-    return this.http.put("http://localhost:8080/modificar/experiencia",experiencia);
-  } 
+    return this.http.put("https://portfolio-backend-srpingboot.herokuapp.com/modificar/experiencia",experiencia);
+  }
 
   borrarExperiencia(id:number): Observable<any>{
-    return this.http.delete("http://localhost:8080/delete/experiencia/"+id);
+    return this.http.delete("https://portfolio-backend-srpingboot.herokuapp.com/delete/experiencia/"+id);
   }
 
 }

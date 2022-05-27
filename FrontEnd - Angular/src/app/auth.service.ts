@@ -9,8 +9,8 @@ import { Token } from '@angular/compiler';
 })
 export class AuthService {
   uri = 'https://localhost:3000/api';
-  token: any; 
-  
+  token: any;
+
   constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string){
@@ -26,7 +26,7 @@ export class AuthService {
   public get logIn() : boolean {
     return (localStorage.getItem('token') !==null);
   }
-    
+
 }
 
 

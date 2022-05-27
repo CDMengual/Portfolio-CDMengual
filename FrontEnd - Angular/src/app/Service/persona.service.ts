@@ -12,10 +12,10 @@ export class PersonaService {
   constructor(private http:HttpClient) { }
 
   getPersona(): Observable<any>{
-    return this.http.get("http://localhost:8080/ver/persona/1");
+    return this.http.get("https://portfolio-backend-srpingboot.herokuapp.com/ver/persona/1");
   }
 
   modificarDatosPersonales(persona:Persona): Observable<any>{
-    return this.http.put("http://localhost:8080/modificar/persona",persona);
-  } 
+    return this.http.put("https://portfolio-backend-srpingboot.herokuapp.com/modificar/persona",persona);
+  }
 }
